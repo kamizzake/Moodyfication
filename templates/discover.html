@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% block title %}Discover – MoodyFication{% endblock
+%} {% block content %}
+
+<div class="discover-wrap">
+	<div class="discover-heading">
+		<h1>Discover Music</h1>
+		<p>Search Spotify Playlist For Your Mood</p>
+	</div>
+
+	<form method="POST" class="spotify-search-form">
+		<input
+			type="text"
+			name="query"
+			class="spotify-input"
+			placeholder="What do you want to listen to?"
+			required />
+		<button type="submit" class="spotify-btn">
+			<i class="fas fa-search"></i> Search
+		</button>
+	</form>
+
+	{% if results %}
+	<div class="discover-results">
+		<h3>Search Results</h3>
+		<div class="results-list">
+			{% for item in results %}
+			<div class="result-item">
+				<img src="{{ item.image }}" class="result-img" />
+				<div class="result-info">
+					<div class="result-name">{{ item.name }}</div>
+					<div class="result-owner">By {{ item.owner }}</div>
+				</div>
+				<form
+					action="{{ url_for('add_spotify_playlist') }}"
+					method="POST"
+					class="result-actions">
+					<input type="hidden" name="playlist_id" value="{{ item.id }}" />
+					<input type="hidden" name="name" value="{{ item.name }}" />
+					<select
+						name="mood_id"
+						class="form-select form-select-sm mood-select"
+						required>
+						<option value="" disabled selected>Add To..</option>
+						{% for m in moods %}
+						<option value="{{ m.id }}">{{ m.name }}</option>
+						{% endfor %}
+					</select>
+					<button type="submit" class="btn btn-sm btn-dark add-btn">
+						<i class="fas fa-plus"></i>
+					</button>
+				</form>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% else %}
+	<div class="discover-empty">
+		<i class="fab fa-spotify"></i>
+		<p>Search For Your Vibe</p>
+	</div>
+	{% endif %}
+</div>
+
+{% endblock %}

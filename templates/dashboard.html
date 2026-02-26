@@ -1,0 +1,147 @@
+{% extends 'base.html' %} {% block title %}Dashboard – MoodyFication{% endblock
+%} {% block content %}
+
+<div class="dash-header">
+	<h1>{{ greeting }}, {{ username }}!</h1>
+	<p>How Are You Feeling Right Now ?</p>
+</div>
+
+<div class="mood-row">
+	{% for m in moods %}
+	<div class="text-center">
+		<a
+			href="{{ url_for('select_mood', mood_id=m.id) }}"
+			class="mood-card {% if current_mood and current_mood.id == m.id %}active{% endif %}">
+			<span class="mood-emoji">{{ m.emoji }}</span>
+			<span class="mood-name">{{ m.name }}</span>
+		</a>
+		{% if m.is_custom %}
+		<div class="custom-mood-actions">
+			<a
+				href="javascript:void(0)"
+				onclick="openEditModal('{{ m.id }}', '{{ m.name }}', '{{ m.emoji }}')"
+				>Edit</a
+			>
+			<a
+				href="{{ url_for('delete_mood', mood_id=m.id) }}"
+				class="del"
+				onclick="return confirm('Delete this mood?');"
+				>Del</a
+			>
+		</div>
+		{% endif %}
+	</div>
+	{% endfor %}
+
+	<button
+		type="button"
+		class="mood-card mood-card-add"
+		onclick="openModal('moodModal')">
+		<span class="mood-emoji"><i class="fas fa-plus"></i></span>
+		<span class="mood-name">Add Mood</span>
+	</button>
+</div>
+
+<div class="playlist-box">
+	<div class="playlist-head">
+		<h2>{{ current_mood.name }} Playlists</h2>
+		<a href="{{ url_for('discover') }}" class="btn btn-green btn-sm">
+			<i class="fas fa-plus"></i> Add Playlist
+		</a>
+	</div>
+
+	{% if playlists %} {% for p in playlists %}
+	<div
+		class="playlist-item {% if current_playlist_url == p.embed_url %}active{% endif %}">
+		<a
+			href="{{ url_for('play_playlist', playlist_id=p.id) }}"
+			class="playlist-link">
+			<span class="dot"></span>
+			<div>
+				<div class="pl-name">{{ p.name }}</div>
+				<div class="pl-src">
+					{% if p.added_by %}By {{ p.added_by }}{% else %}Spotify{% endif %}
+				</div>
+			</div>
+		</a>
+		{% if p.added_by == session.get('username') %}
+		<a
+			href="{{ url_for('delete_playlist', playlist_id=p.id) }}"
+			class="del-pl-btn"
+			onclick="return confirm('Remove playlist?');">
+			<i class="fas fa-trash"></i>
+		</a>
+		{% endif %}
+	</div>
+	{% endfor %} {% else %}
+	<p class="playlist-empty">No Playlists Found...</p>
+	{% endif %}
+</div>
+
+<div class="custom-modal" id="moodModal">
+	<div class="custom-modal-content">
+		<h5 class="modal-title">Add Custom Mood</h5>
+		<form action="{{ url_for('add_mood') }}" method="POST">
+			<input
+				type="text"
+				class="form-control mb-2"
+				name="mood_name"
+				placeholder="Name (e.g. Nostalgic)"
+				required />
+			<input
+				type="text"
+				class="form-control mb-3"
+				name="mood_emoji"
+				placeholder="Emoji (e.g. 🌙)"
+				required />
+			<div class="modal-actions">
+				<button
+					type="button"
+					class="btn btn-secondary btn-sm me-1"
+					onclick="closeModal('moodModal')">
+					Cancel
+				</button>
+				<button type="submit" class="btn btn-sm btn-modal-confirm text-white">
+					Add Mood
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="custom-modal" id="editMoodModal">
+	<div class="custom-modal-content">
+		<h5 class="modal-title">Edit Custom Mood</h5>
+		<form id="editMoodForm" method="POST">
+			<input
+				type="text"
+				class="form-control mb-2"
+				name="mood_name"
+				id="edit_mood_name"
+				placeholder="New Name"
+				required />
+			<input
+				type="text"
+				class="form-control mb-3"
+				name="mood_emoji"
+				id="edit_mood_emoji"
+				placeholder="New Emoji"
+				required />
+			<div class="modal-actions">
+				<button
+					type="button"
+					class="btn btn-secondary btn-sm me-1"
+					onclick="closeModal('editMoodModal')">
+					Cancel
+				</button>
+				<button type="submit" class="btn btn-sm btn-modal-confirm text-white">
+					Save Changes
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+{% endblock %} {% block scripts %}
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+{% endblock %}

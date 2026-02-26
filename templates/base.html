@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{% block title %}MoodyFication{% endblock %}</title>
+		<link
+			rel="icon"
+			type="image/jpeg"
+			href="{{ url_for('static', filename='icon.jpg') }}" />
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='style.css') }}" />
+	</head>
+	<body class="{% if current_mood %}{{ current_mood.css_class }}{% endif %}">
+		<div class="app-wrapper">
+			<div class="sidebar-left">
+				<div class="logo">
+					<img src="{{ url_for('static', filename='icon.jpg') }}" />
+					<span>MoodyFication</span>
+				</div>
+
+				<p class="nav-label">Menu</p>
+				<a
+					href="{{ url_for('dashboard') }}"
+					class="nav-item {% if request.endpoint == 'dashboard' %}active{% endif %}">
+					<i class="fas fa-play-circle"></i> Player
+				</a>
+				<a
+					href="{{ url_for('tracking') }}"
+					class="nav-item {% if request.endpoint == 'tracking' %}active{% endif %}">
+					<i class="fas fa-chart-line"></i> Tracking
+				</a>
+				<a
+					href="{{ url_for('discover') }}"
+					class="nav-item {% if request.endpoint == 'discover' %}active{% endif %}">
+					<i class="fas fa-search"></i> Discover
+				</a>
+
+				{% if session.get('username') %}
+				<div class="user-box-container">
+					<p class="session-label">Current Session</p>
+					<div class="user-card">
+						<div class="user-avatar"><i class="fas fa-user"></i></div>
+						<div>
+							<div class="user-name">{{ session.get('username') }}</div>
+							<div class="user-mode">Spotify Mode</div>
+						</div>
+					</div>
+					<a href="{{ url_for('exit_session') }}" class="exit-btn">
+						<i class="fas fa-sign-out-alt"></i> Exit Session
+					</a>
+				</div>
+				{% endif %}
+			</div>
+
+			<div class="main-area">{% block content %}{% endblock %}</div>
+
+			{% if session.get('username') %}
+			<div class="sidebar-right">
+				{% if current_playlist_url %}
+				<iframe
+					src="{{ current_playlist_url }}"
+					allow="
+						autoplay;
+						clipboard-write;
+						encrypted-media;
+						fullscreen;
+						picture-in-picture;
+					"></iframe>
+				{% else %}
+				<div class="player-welcome">
+					<i class="fas fa-headphones"></i>
+					<h4>Welcome!</h4>
+					<p>
+						Pick Your Mood 😊<br />Select A Playlist 🎞️<br />Start Listening 🎵
+					</p>
+				</div>
+				{% endif %}
+			</div>
+			{% endif %}
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+		{% block scripts %}{% endblock %}
+	</body>
+</html>

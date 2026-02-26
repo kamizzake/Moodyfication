@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>MoodyFication</title>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='style.css') }}" />
+	</head>
+	<body class="landing">
+		<div class="landing-wrap">
+			<img
+				src="{{ url_for('static', filename='icon.jpg') }}"
+				class="landing-icon" />
+			<h1 class="landing-title">MoodyFication</h1>
+			<p class="landing-sub">Music That Matches Your Mood</p>
+
+			<div class="login-box">
+				<h2 class="login-box-title">Start Your Session</h2>
+				<form action="{{ url_for('auth') }}" method="POST">
+					<div class="mb-3 text-start">
+						<label class="form-label-custom"
+							><i class="fas fa-user"></i> Username</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							name="username"
+							placeholder="Enter A Username"
+							required />
+					</div>
+
+					<div class="mb-3 text-start">
+						<label class="form-label-custom"
+							><i class="fas fa-lock"></i> PIN Code</label
+						>
+						<input
+							type="password"
+							class="form-control"
+							name="password"
+							placeholder="Enter a PIN code"
+							required />
+					</div>
+
+					<div class="mb-3 text-start">
+						<label class="form-label-custom"
+							><i class="fas fa-heart"></i> Initial Mood</label
+						>
+						<select class="form-select" name="mood_id" required>
+							<option value="" disabled selected>How Are You Feeling ?</option>
+							{% for m in moods %}
+							<option value="{{ m.id }}">{{ m.emoji }} {{ m.name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+
+					<button type="submit" class="btn-start">
+						<i class="fas fa-play"></i> Start Listening
+					</button>
+				</form>
+
+				<div class="landing-note">
+					<i class="fab fa-spotify spotify-green"></i>
+					For The Best Experience, Please Have Your <br />Spotify Account Logged
+					Into Current Browser!
+				</div>
+			</div>
+
+			<div class="quote-box">
+				<i class="fas fa-quote-left"></i>
+				<p>{{ quote | safe }}</p>
+			</div>
+		</div>
+
+		<div class="landing-footer">Made With 💌 For Music Lovers</div>
+	</body>
+</html>
