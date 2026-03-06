@@ -1,13 +1,11 @@
 # 🎵 MoodyFication
 
 > **Music that matches your mood.**  
-> A mood-driven music web app built on Flask and the Spotify API — pick how you feel, get a playlist, start listening.
+> A mood-driven music web app built on Flask and the Spotify API<br>Pick how you feel, Get a playlist, Start listening.
 
 &nbsp;
 
-Built as part of the **DS3 Web Engineering** module at
-**XU Exponential University of Applied Sciences** by
-**Mueed Baloch** and **Diya Pandya** — Winter 2025
+Built as part of the **DS3 Web Engineering** module at <br> **XU Exponential University of Applied Sciences** by <br> **Mueed Baloch** and **Diya Pandya** — Winter 2025
 
 ---
 
