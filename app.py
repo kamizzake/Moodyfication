@@ -11,8 +11,8 @@ app.secret_key = "moodyfication_secret_key"
 sp = None
 try:
     auth = SpotifyClientCredentials(
-        client_id="Null",
-        client_secret="Null",
+        client_id="8c93efe17a7e4d2db3ce2a2f21501047",
+        client_secret="b4923282345b43c5b02bc7104030ebdf",
     )
     sp = spotipy.Spotify(auth_manager=auth)
 except:

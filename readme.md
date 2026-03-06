@@ -182,7 +182,7 @@ Updates follow this flow:
 2. The PythonAnywhere console pulls the latest version via `git pull`
 3. The web app is reloaded from the PythonAnywhere dashboard
 
-No build step, No pipeline — just Pull and Reload
+No Build Step, No Pipeline — Just Pull and Reload
 
 ---
 
@@ -197,10 +197,10 @@ No build step, No pipeline — just Pull and Reload
 
 ## 🛠️ Built With
 
-- [Flask](https://flask.palletsprojects.com/) — Python web framework
-- [Spotipy](https://spotipy.readthedocs.io/) — Spotify Web API wrapper
-- [Bootstrap 5](https://getbootstrap.com/) — UI framework
-- [SQLite](https://www.sqlite.org/) — Lightweight database
+- [Flask](https://flask.palletsprojects.com/) — Python Web Framework
+- [Spotipy](https://spotipy.readthedocs.io/) — Spotify Web API Wrapper
+- [Bootstrap 5](https://getbootstrap.com/) — UI Framework
+- [SQLite](https://www.sqlite.org/) — Lightweight Database
 
 ---
 
