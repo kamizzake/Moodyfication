@@ -32,30 +32,30 @@ MoodyFication connects your current mood to curated Spotify playlists, plays the
 
 ### Backend
 
-| Technology | Purpose                                           |
-| ---------- | ------------------------------------------------- |
-| Python 3   | Core language                                     |
-| Flask      | Web framework and routing                         |
-| SQLite     | Database — users, moods, playlists, activity logs |
-| Spotipy    | Python wrapper for the Spotify Web API            |
-| Werkzeug   | Password hashing for session security             |
+| Technology | Purpose                                            |
+| ---------- | -------------------------------------------------- |
+| Python 3   | Core Language                                      |
+| Flask      | Web Framework and Routing                          |
+| SQLite     | Database —> users, moods, playlists, activity logs |
+| Spotipy    | Python wrapper for the Spotify Web API             |
+| Werkzeug   | Password hashing for session security              |
 
 ### Frontend
 
 | Technology     | Purpose                             |
 | -------------- | ----------------------------------- |
-| HTML5 / CSS3   | Structure and styling               |
+| HTML5 / CSS3   | Structure and Styling               |
 | JavaScript     | Modal interactions via `main.js`    |
 | Bootstrap 5    | UI components and responsive layout |
-| Font Awesome 6 | Icons throughout the interface      |
+| Font Awesome 6 | Icons throughout the Interface      |
 
 ### Infrastructure
 
 | Tool           | Purpose                                                    |
 | -------------- | ---------------------------------------------------------- |
-| PythonAnywhere | Hosting and deployment                                     |
+| PythonAnywhere | Hosting and Deployment                                     |
 | GitHub         | Version control and collaboration                          |
-| VS Code        | Primary editor with formatting and productivity extensions |
+| VS Code        | Primary Editor with formatting and productivity extensions |
 
 ---
 
@@ -125,33 +125,33 @@ These are the core things the app does:
 
 ## Quick Setup
 
-**1. Clone the repo**
+**1. Clone The Repo**
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/MoodyFication.git
 cd MoodyFication
 ```
 
-**2. Install dependencies**
+**2. Install Dependencies**
 
 ```bash
 pip install -r require.txt
 ```
 
-**3. Initialize the database**  
+**3. Initialize Database**  
 This creates all tables and seeds the 6 default moods and 24 playlists:
 
 ```bash
 python setup.py
 ```
 
-**4. Run the app**
+**4. Run The App**
 
 ```bash
 python app.py
 ```
 
-**5. Open in browser**
+**5. Open In Browser**
 
 ```
 http://127.0.0.1:5000
